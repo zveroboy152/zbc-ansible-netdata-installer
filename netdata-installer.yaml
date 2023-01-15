@@ -4,8 +4,8 @@
   hosts:
   #Specify your claim token, url, and specfic channel (https://learn.netdata.cloud/docs/agent/packaging/installer/methods/kickstart) 
   vars:
-    claim-token: 
-    claim-url: 
+    claim_token: 
+    claim_url: 
     channel: 
   become: yes
   #Specify your remote user
@@ -22,7 +22,7 @@
       become: yes
       shell: 
         cmd: |
-          wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh --claim-token {{ claim-token }} --claim-url {{ claim-url }} --non-interactive {{ channel }}
+          wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh --claim-token {{ claim_token }} --claim-url {{ claim_url }} --non-interactive {{ channel }}
 
     #Restart the netdata agent on the server.
     - name: Restart NetData Agent
