@@ -1,0 +1,31 @@
+---
+- name: Install Netdata Agent
+  #Specify your hosts here
+  hosts:
+  #Specify your claim token, url, and specfic channel (https://learn.netdata.cloud/docs/agent/packaging/installer/methods/kickstart) 
+  vars:
+    claim-token: 
+    claim-url: 
+    channel: 
+  become: yes
+  #Specify your remote user
+  remote_user: 
+
+  tasks:
+    #Install WGET as Netdata's kickstart needs it.
+    - name: Install wget
+      ansible.builtin.package:
+          name: wget
+          state: present
+    #Install Netdata to the default location of your netdata tenant
+    - name: Install Netdata Agent via Kickstart
+      become: yes
+      shell: 
+        cmd: |
+          wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh --claim-token {{ claim-token }} --claim-url {{ claim-url }} --non-interactive {{ channel }}
+
+    #Restart the netdata agent on the server.
+    - name: Restart NetData Agent
+      ansible.builtin.service:
+        name: netdata
+        state: restarted
