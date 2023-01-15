@@ -1,0 +1,9 @@
+dev:
+  hosts:
+    baseline-ubuntu-20:
+      ansible_host: 10.0.0.10
+
+prod:
+  hosts:
+    baseline-rocky-9:
+      ansible_host: 10.0.0.20
